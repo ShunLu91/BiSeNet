@@ -1,0 +1,7 @@
+tqdm==4.36.1
+numpy==1.16.6
+torchvision==0.5.0
+torch==1.4.0
+apex==0.9.10dev
+asposestorage==1.0.2
+Pillow==7.0.0
