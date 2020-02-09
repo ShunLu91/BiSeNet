@@ -29,7 +29,7 @@ logger = logging.getLogger()
 
 def parse_args():
     parse = argparse.ArgumentParser()
-    parse.add_argument('--local_rank', dest='local_rank', type=int, default=-1)
+    # parse.add_argument('--local_rank', dest='local_rank', type=int, default=-1)
     parse.add_argument('--data_dir', type=str,
                        default='/home/aistudio/data/data20598/cityscapes/leftImg8bit_trainvaltest')
 

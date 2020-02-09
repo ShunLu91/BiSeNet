@@ -6,7 +6,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.model_zoo as modelzoo
 
-from modules.bn import InPlaceABNSync as BatchNorm2d
+# from modules.bn import InPlaceABNSync as BatchNorm2d
+from torch.nn import BatchNorm2d
+
 
 resnet18_url = 'https://download.pytorch.org/models/resnet18-5c106cde.pth'
 
