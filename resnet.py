@@ -25,14 +25,14 @@ class BasicBlock(nn.Module):
         self.conv1 = conv3x3(in_chan, out_chan, stride)
         self.bn1 = BatchNorm2d(out_chan)
         self.conv2 = conv3x3(out_chan, out_chan)
-        self.bn2 = BatchNorm2d(out_chan, activation='none')
+        self.bn2 = BatchNorm2d(out_chan)
         self.relu = nn.ReLU(inplace=True)
         self.downsample = None
         if in_chan != out_chan or stride != 1:
             self.downsample = nn.Sequential(
                 nn.Conv2d(in_chan, out_chan,
                           kernel_size=1, stride=stride, bias=False),
-                BatchNorm2d(out_chan, activation='none'),
+                BatchNorm2d(out_chan),
                 )
 
     def forward(self, x):
