@@ -87,7 +87,7 @@ def train():
     warmup_steps = 1000
     warmup_start_lr = 1e-5
     optim = Optimizer(
-        model=net.module,
+        model=net,
         lr0=lr_start,
         momentum=momentum,
         wd=weight_decay,
