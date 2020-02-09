@@ -54,11 +54,11 @@ def train():
     cropsize = [1024, 1024]
     ds = CityScapes(args.data_dir, cropsize=cropsize, mode='train')
     # sampler = torch.utils.data.distributed.DistributedSampler(ds)
-    sampler = torch.utils.data.RandomSampler(ds)
+    # sampler = torch.utils.data.RandomSampler(ds)
     dl = DataLoader(ds,
                     batch_size=n_img_per_gpu,
-                    shuffle=False,
-                    sampler=sampler,
+                    shuffle=True,
+                    # sampler=sampler,
                     num_workers=n_workers,
                     pin_memory=True,
                     drop_last=True)
@@ -108,7 +108,7 @@ def train():
             if not im.size()[0] == n_img_per_gpu: raise StopIteration
         except StopIteration:
             epoch += 1
-            sampler.set_epoch(epoch)
+            # sampler.set_epoch(epoch)
             diter = iter(dl)
             im, lb = next(diter)
         im = im.cuda()
