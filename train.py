@@ -49,7 +49,7 @@ def train():
 
     ## dataset
     n_classes = 19
-    n_img_per_gpu = 8
+    n_img_per_gpu = 4
     n_workers = 4
     cropsize = [1024, 1024]
     ds = CityScapes(args.data_dir, cropsize=cropsize, mode='train')
@@ -81,10 +81,10 @@ def train():
     ## optimizer
     momentum = 0.9
     weight_decay = 5e-4
-    lr_start = 1e-2
-    max_iter = 80000
+    lr_start = 5e-3
+    max_iter = 160000
     power = 0.9
-    warmup_steps = 1000
+    warmup_steps = 2000
     warmup_start_lr = 1e-5
     optim = Optimizer(
         model=net,
