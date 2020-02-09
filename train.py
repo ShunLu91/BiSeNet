@@ -81,8 +81,8 @@ def train():
     ## optimizer
     momentum = 0.9
     weight_decay = 5e-4
-    lr_start = 5e-3
-    max_iter = 160000
+    lr_start = 1e-2
+    max_iter = 80000
     power = 0.9
     warmup_steps = 2000
     warmup_start_lr = 1e-5
