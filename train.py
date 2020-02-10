@@ -155,7 +155,8 @@ def train():
     save_pth = osp.join(respth, 'model_final.pth')
     net.cpu()
     state = net.module.state_dict() if hasattr(net, 'module') else net.state_dict()
-    if dist.get_rank() == 0: torch.save(state, save_pth)
+    # if dist.get_rank() == 0:
+    torch.save(state, save_pth)
     logger.info('training done, model saved to: {}'.format(save_pth))
 
 
