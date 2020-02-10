@@ -33,10 +33,10 @@ def parse_args():
                        default='/home/aistudio/data/data20598/cityscapes/leftImg8bit_trainvaltest')
 
     return parse.parse_args()
+args = parse_args()
 
 
 def train():
-    args = parse_args()
     # torch.cuda.set_device(args.local_rank)
     # dist.init_process_group(
     #     backend='nccl',
@@ -162,4 +162,4 @@ def train():
 
 if __name__ == "__main__":
     train()
-    evaluate()
+    evaluate(dspth=args.data_dir)
