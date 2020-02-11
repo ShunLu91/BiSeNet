@@ -83,7 +83,7 @@ def train():
     lr_start = 1e-2
     max_iter = 80000
     power = 0.9
-    warmup_steps = 2000
+    warmup_steps = 1000
     warmup_start_lr = 1e-5
     optim = Optimizer(
         model=net,
