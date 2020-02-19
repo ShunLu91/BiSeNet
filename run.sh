@@ -1,2 +1,2 @@
-export CUDA_VISIBLE_DEVICES=7 && nohup python -u train.py \
---data_dir /home/work/dataset/city/cityscapes/leftImg8bit_trainvaltest  > ./bisenet.log  2>&1 &
+export CUDA_VISIBLE_DEVICES=6 && nohup python -u train.py \
+--data_dir /dataset/cityscapes/leftImg8bit_trainvaltest  > log0  2>&1 &

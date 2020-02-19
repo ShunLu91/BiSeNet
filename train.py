@@ -30,7 +30,7 @@ def parse_args():
     parse = argparse.ArgumentParser()
     # parse.add_argument('--local_rank', dest='local_rank', type=int, default=-1)
     parse.add_argument('--data_dir', type=str,
-                       default='/home/aistudio/data/data20598/cityscapes/leftImg8bit_trainvaltest')
+                       default='/dataset/cityscapes/leftImg8bit_trainvaltest')
 
     return parse.parse_args()
 args = parse_args()
@@ -49,7 +49,7 @@ def train():
     ## dataset
     n_classes = 19
     n_img_per_gpu = 8
-    n_workers = 8
+    n_workers = 4
     cropsize = [1024, 1024]
     ds = CityScapes(args.data_dir, cropsize=cropsize, mode='train')
     # sampler = torch.utils.data.distributed.DistributedSampler(ds)
