@@ -71,7 +71,7 @@ def train():
     net = BiSeNet(n_classes=n_classes)
     net.cuda()
     net.train()
-    net = nn.DataParallel(net, device_ids=[6, 7])
+    net = nn.DataParallel(net)
     # net = nn.parallel.DistributedDataParallel(net,
     #         device_ids = [args.local_rank, ],
     #         output_device = args.local_rank
