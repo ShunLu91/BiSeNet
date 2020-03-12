@@ -34,7 +34,7 @@ def parse_args():
             '--local_rank',
             dest = 'local_rank',
             type = int,
-            default = -1,
+            default = 0,
             )
     return parse.parse_args()
 
