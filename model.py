@@ -8,8 +8,8 @@ import torch.nn.functional as F
 import torchvision
 
 from resnet import Resnet18
-# from modules.bn import InPlaceABNSync as BatchNorm2d
-from torch.nn import BatchNorm2d
+from modules.bn import InPlaceABNSync as BatchNorm2d
+# from torch.nn import BatchNorm2d
 
 
 class ConvBNReLU(nn.Module):
