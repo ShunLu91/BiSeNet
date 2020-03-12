@@ -16,6 +16,7 @@ import torch.nn.functional as F
 import torch.distributed as dist
 
 import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "6, 7"
 import os.path as osp
 import logging
 import time
