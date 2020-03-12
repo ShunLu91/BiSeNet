@@ -105,7 +105,7 @@ def train():
             warmup_start_lr = warmup_start_lr,
             max_iter = max_iter,
             power = power)
-    optim = hvd.DistributedOptimizer(optim, named_parameters=net.named_parameters())
+    optim = hvd.DistributedOptimizer(optim.optim, named_parameters=net.named_parameters())
     # 5. 初始化的时候广播参数，这个是为了在一开始的时候同步各个gpu之间的参数
     hvd.broadcast_parameters(net.state_dict(), root_rank=0)
     ## train loop
