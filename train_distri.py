@@ -57,11 +57,11 @@ def train():
     n_workers = 4
     cropsize = [1024, 1024]
     ds = CityScapes('/dataset/cityscapes/leftImg8bit_trainvaltest', cropsize=cropsize, mode='train')
-    sampler = torch.utils.data.distributed.DistributedSampler(ds)
+    # sampler = torch.utils.data.distributed.DistributedSampler(ds)
     dl = DataLoader(ds,
                     batch_size = n_img_per_gpu,
-                    shuffle = False,
-                    sampler = sampler,
+                    shuffle = True,
+                    # sampler = sampler,
                     num_workers = n_workers,
                     pin_memory = True,
                     drop_last = True)
