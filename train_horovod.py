@@ -77,6 +77,8 @@ def train():
     ignore_idx = 255
     net = BiSeNet(n_classes=n_classes)
     net.cuda()
+    # 5. 初始化的时候广播参数，这个是为了在一开始的时候同步各个gpu之间的参数
+    hvd.broadcast_parameters(net.state_dict(), root_rank=0)
     net.train()
     # net = nn.parallel.DistributedDataParallel(net,
     #         device_ids = [args.local_rank, ],
@@ -105,9 +107,10 @@ def train():
             warmup_start_lr = warmup_start_lr,
             max_iter = max_iter,
             power = power)
+    hvd.broadcast_optimizer_state(optim.optim, root_rank=0)
     optim = hvd.DistributedOptimizer(optim.optim, named_parameters=net.named_parameters())
-    # 5. 初始化的时候广播参数，这个是为了在一开始的时候同步各个gpu之间的参数
-    hvd.broadcast_parameters(net.state_dict(), root_rank=0)
+
+
     ## train loop
     msg_iter = 50
     loss_avg = []
