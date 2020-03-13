@@ -60,7 +60,7 @@ def train():
     sampler = torch.utils.data.distributed.DistributedSampler(ds)
     dl = DataLoader(ds,
                     batch_size = n_img_per_gpu,
-                    shuffle = True,
+                    shuffle = False,
                     sampler = sampler,
                     num_workers = n_workers,
                     pin_memory = True,
