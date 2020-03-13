@@ -41,14 +41,14 @@ def parse_args():
 
 def train():
     args = parse_args()
-    # torch.cuda.set_device(args.local_rank)
-    # dist.init_process_group(
-    #             backend = 'nccl',
-    #             init_method = 'tcp://127.0.0.1:33271',
-    #             world_size = 2,
-    #             world_size = torch.cuda.device_count(),
-                # rank=args.local_rank
-                # )
+    torch.cuda.set_device(args.local_rank)
+    dist.init_process_group(
+                backend = 'nccl',
+                init_method = 'tcp://127.0.0.1:33271',
+                world_size = 2,
+                # world_size = torch.cuda.device_count(),
+                rank=args.local_rank
+                )
     setup_logger(respth)
 
     ## dataset
@@ -57,11 +57,11 @@ def train():
     n_workers = 4
     cropsize = [1024, 1024]
     ds = CityScapes('/dataset/cityscapes/leftImg8bit_trainvaltest', cropsize=cropsize, mode='train')
-    # sampler = torch.utils.data.distributed.DistributedSampler(ds)
+    sampler = torch.utils.data.distributed.DistributedSampler(ds)
     dl = DataLoader(ds,
                     batch_size = n_img_per_gpu,
                     shuffle = True,
-                    # sampler = sampler,
+                    sampler = sampler,
                     num_workers = n_workers,
                     pin_memory = True,
                     drop_last = True)
@@ -71,11 +71,11 @@ def train():
     net = BiSeNet(n_classes=n_classes)
     net.cuda()
     net.train()
-    net = nn.DataParallel(net)
-    # net = nn.parallel.DistributedDataParallel(net,
-    #         device_ids = [args.local_rank, ],
-    #         output_device = args.local_rank
-    #         )
+    # net = nn.DataParallel(net)
+    net = nn.parallel.DistributedDataParallel(net,
+            device_ids = [args.local_rank, ],
+            output_device = args.local_rank
+            )
     score_thres = 0.7
     n_min = n_img_per_gpu*cropsize[0]*cropsize[1]//16
     criteria_p = OhemCELoss(thresh=score_thres, n_min=n_min, ignore_lb=ignore_idx)
